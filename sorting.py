@@ -212,3 +212,29 @@ def quick_sort(nums):  # n^2
             _quick_sort(items, split_index + 1, high)
 
     _quick_sort(nums, 0, nums.get_len() - 1)
+
+'''
+Author : github/adityamatt
+Implements shell sort algorithm, Complexity n^2
+'''
+def shell_sort(nums):   
+    n = nums.get_len()
+    #Start with large gap and then keep on reducing it
+    gap = int(n/2)
+    while gap>0:
+        ##Implement a insertion sort starting from gap to n
+        for i in range(gap,n):
+            #Save current element 
+            temp = nums.values[i]
+            j = i
+            #Shifting gap current element to correct position by linear search as in insertion sort
+            while j>=gap and nums.values[j-gap] > temp:
+                #Correct position found
+                nums.set(j,nums.values[j-gap])
+                j -=gap
+            #Putting in temp element back in place
+            nums.set(j,temp)
+        
+        #Reduce the gap to half
+        gap = int(gap/2)
+
